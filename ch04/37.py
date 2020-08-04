@@ -28,13 +28,14 @@ whole_sentense_list = whole_sentense_list[1:]
 
 count_dict = {}
 for sentense in whole_sentense_list:
-  sentense = [word['surface'] for word in sentense]
-  if '猫' in sentense:
-    for word in sentense:
-      if word not in count_dict:
-        count_dict[word] = 1
-      else:
-        count_dict[word]+=1
+    neko_check_sentense = [word['surface'] for word in sentense]
+    if '猫' in neko_check_sentense:
+        for word in sentense:
+            if word['pos'] != '特殊':
+                if word['surface'] not in count_dict:
+                    count_dict[word['surface']] = 1
+                else:
+                    count_dict[word['surface']]+=1
 
 cat_df = pd.DataFrame({'word': list(count_dict.keys()), 'count': list(count_dict.values())})
 cat_df = cat_df[cat_df['word']!='猫']

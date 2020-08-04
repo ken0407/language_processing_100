@@ -28,12 +28,13 @@ whole_sentense_list = whole_sentense_list[1:]
 
 word_dict = {}
 for sentense in whole_sentense_list:
-  for word in sentense:
-    surface = word['surface']
-    if surface in word_dict:
-      word_dict[surface]+=1
-    else:
-      word_dict[surface] = 1
+    for word in sentense:
+        if word['pos'] != '特殊':
+            surface = word['surface']
+            if surface in word_dict:
+                word_dict[surface] += 1
+            else:
+                word_dict[surface] = 1
 
 df = pd.DataFrame({'word':list(word_dict.keys()), 'count': list(word_dict.values())})
 df.sort_values(by='count', ascending=False, inplace=True)
@@ -41,7 +42,8 @@ df.sort_values(by='count', ascending=False, inplace=True)
 words = []
 for sentense in whole_sentense_list:
     for word in sentense:
-        words.append(word['surface'])
+        if word['pos'] != '特殊':
+            words.append(word['surface'])
 tmp_df = pd.DataFrame({'word': words})
 le = LabelEncoder()
 top10 = list(df.iloc[:10, 0].values)

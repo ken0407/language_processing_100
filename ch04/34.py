@@ -28,11 +28,18 @@ with open('../data/neko.txt', mode='r') as f:
 
 noun_list = []
 for sentense in whole_sentense_list:
+    num = 0
+    nouns = ''
     for i, word in enumerate(sentense):
         if word['pos'] == '名詞':
-            noun_list.append(word['surface'])
-for word in set(noun_list):
-    pattern = r'({})+'.format(word)
-    ans = set(re.findall(pattern, original_neko))
-    if len(ans)>1:
-        print(ans)
+            nouns = ''.join([nouns, word['surface']])
+            num += 1
+        elif num >= 2:
+            print(nouns)
+            num = 0
+            nouns = ''
+        else:
+            num = 0
+            nouns = ''
+            
+
