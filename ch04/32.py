@@ -18,7 +18,7 @@ for word in neko_list:
     if word_info[0] == '':
         continue
     else:
-        sentense_list.append({'surface': word_info[0], 'base': word_info[7], 'pos': word_info[1]})
+        sentense_list.append({'surface': word_info[0], 'base': word_info[5], 'pos': word_info[1]})
 whole_sentense_list = whole_sentense_list[1:]
 
 verb_surface_set = set()
